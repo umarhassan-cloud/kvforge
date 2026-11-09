@@ -1,0 +1,17 @@
+# Runtime
+torch>=2.1
+numpy>=1.24
+
+# Serving (scripts/serve.py)
+fastapi>=0.110
+uvicorn>=0.27
+pydantic>=2.5
+
+# Development
+pytest>=7.4
+httpx>=0.27
+ruff>=0.4
+
+# Optional: load real checkpoints (Llama / Gemma / Mistral)
+# transformers>=4.40
+# safetensors>=0.4

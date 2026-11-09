@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.prof
+prof.out
+.idea/
+.vscode/
+.DS_Store
+
+# benchmark artefacts (the committed report lives in benchmarks/BENCHMARK_REPORT.md)
+benchmarks/results/*.log
+benchmarks/results/quick.json
+
+# model weights
+*.safetensors
+*.bin
+*.pt

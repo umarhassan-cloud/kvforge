@@ -1,0 +1,416 @@
+{
+  "env": {
+    "python": "3.10.11",
+    "torch": "2.13.0+cpu",
+    "device": "cpu",
+    "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "threads": 1,
+    "gpu": null,
+    "preset": "small",
+    "params_m": 26.083328
+  },
+  "args": {
+    "preset": "small",
+    "device": "cpu",
+    "dtype": "float32",
+    "modes": [
+      "naive",
+      "continuous",
+      "speculative",
+      "int8",
+      "int4"
+    ],
+    "num_requests": 48,
+    "prompt_len": [
+      16,
+      128
+    ],
+    "output_len": [
+      8,
+      128
+    ],
+    "max_num_seqs": 16,
+    "max_num_batched_tokens": 1024,
+    "block_size": 16,
+    "num_blocks": 1024,
+    "spec_k": 4,
+    "draft_layers": 1,
+    "residual_scale": 0.05,
+    "group_size": 128,
+    "seed": 0,
+    "price": "cpu",
+    "no_sweep": false,
+    "no_quant_accuracy": false,
+    "sweep_scales": [
+      0.15,
+      0.07,
+      0.05,
+      0.03
+    ],
+    "sweep_k": [
+      2,
+      4
+    ],
+    "sweep_requests": 4,
+    "threads": 1,
+    "quick": false,
+    "tag": "small-cpu"
+  },
+  "modes": {
+    "naive": {
+      "output_tok_s": 59.61025546339711,
+      "ttft_p50_ms": 19246.469100005925,
+      "ttft_p99_ms": 36209.85810000275,
+      "tpot_p50_ms": 227.82005797605615,
+      "tpot_p99_ms": 1777.1461946938307,
+      "e2e_p50_ms": 33727.27839999425,
+      "e2e_p99_ms": 50763.068899992504,
+      "mean_batch": 16.0,
+      "peak_kv_mib": 47.0625,
+      "mean_kv_frag": 0.4531036834924966,
+      "usd_per_1m": 1.8639596533743668,
+      "weights_mib": 99.525390625,
+      "generated": 3026.0
+    },
+    "continuous": {
+      "output_tok_s": 84.62180021614618,
+      "ttft_p50_ms": 9339.737800000876,
+      "ttft_p99_ms": 27401.224657996212,
+      "tpot_p50_ms": 157.64777527761504,
+      "tpot_p99_ms": 247.6117708774949,
+      "e2e_p50_ms": 22110.19379999925,
+      "e2e_p99_ms": 35654.47918699938,
+      "mean_batch": 12.991416309012875,
+      "peak_kv_mib": 24.9375,
+      "mean_kv_frag": 0.05407721984687472,
+      "usd_per_1m": 1.3130317580966642,
+      "weights_mib": 99.525390625,
+      "forward_passes": 233,
+      "preemptions": 0,
+      "generated": 3026.0
+    },
+    "speculative": {
+      "output_tok_s": 78.5299553604529,
+      "ttft_p50_ms": 10401.545000000624,
+      "ttft_p99_ms": 27997.79873800726,
+      "tpot_p50_ms": 171.10576480771178,
+      "tpot_p99_ms": 292.9587239380089,
+      "e2e_p50_ms": 23828.75615001103,
+      "e2e_p99_ms": 38480.29347300064,
+      "mean_batch": 12.556701030927835,
+      "peak_kv_mib": 25.5,
+      "mean_kv_frag": 0.07259017755728861,
+      "usd_per_1m": 1.4148882499819404,
+      "weights_mib": 99.525390625,
+      "forward_passes": 122,
+      "preemptions": 0,
+      "generated": 3026.0,
+      "acceptance_rate": 0.4036,
+      "per_token_acceptance": 0.6682,
+      "tokens_per_step": 2.6142
+    },
+    "int8": {
+      "output_tok_s": 66.4499017874306,
+      "ttft_p50_ms": 12590.076600004977,
+      "ttft_p99_ms": 34769.5174950028,
+      "tpot_p50_ms": 206.6738623877386,
+      "tpot_p99_ms": 259.2039928561035,
+      "e2e_p50_ms": 27415.79950000596,
+      "e2e_p99_ms": 45335.719624010235,
+      "mean_batch": 12.991416309012875,
+      "peak_kv_mib": 24.9375,
+      "mean_kv_frag": 0.05407721984687472,
+      "usd_per_1m": 1.6721034662556635,
+      "weights_mib": 49.1083984375,
+      "forward_passes": 233,
+      "preemptions": 0,
+      "generated": 3026.0
+    },
+    "int4": {
+      "output_tok_s": 40.246491967591986,
+      "ttft_p50_ms": 19440.861050010426,
+      "ttft_p99_ms": 53810.571424002126,
+      "tpot_p50_ms": 336.5020961344098,
+      "tpot_p99_ms": 416.768219133918,
+      "e2e_p50_ms": 44220.773900000495,
+      "e2e_p99_ms": 74579.52971401028,
+      "mean_batch": 12.991416309012875,
+      "peak_kv_mib": 24.9375,
+      "mean_kv_frag": 0.05407721984687472,
+      "usd_per_1m": 2.7607651171332406,
+      "weights_mib": 41.216796875,
+      "forward_passes": 233,
+      "preemptions": 0,
+      "generated": 3026.0
+    }
+  },
+  "spec_sweep": [
+    {
+      "residual_scale": 0.15,
+      "k": 2,
+      "acceptance_rate": 0.1623,
+      "alpha": 0.2594,
+      "tokens_per_step": 1.3246,
+      "theory_tokens_per_step": 1.3266883600000001,
+      "baseline_tpot_ms": 39.316446031628566,
+      "spec_tpot_ms": 53.43107142846473,
+      "speedup": 0.8644403996270122
+    },
+    {
+      "residual_scale": 0.15,
+      "k": 4,
+      "acceptance_rate": 0.0829,
+      "alpha": 0.25,
+      "tokens_per_step": 1.3316,
+      "theory_tokens_per_step": 1.33203125,
+      "baseline_tpot_ms": 39.316446031628566,
+      "spec_tpot_ms": 77.13657460315892,
+      "speedup": 0.5579670161370635
+    },
+    {
+      "residual_scale": 0.07,
+      "k": 2,
+      "acceptance_rate": 0.4697,
+      "alpha": 0.5905,
+      "tokens_per_step": 1.9394,
+      "theory_tokens_per_step": 1.93919025,
+      "baseline_tpot_ms": 35.857965079476195,
+      "spec_tpot_ms": 36.65512301594145,
+      "speedup": 0.9800574550861892
+    },
+    {
+      "residual_scale": 0.07,
+      "k": 4,
+      "acceptance_rate": 0.2945,
+      "alpha": 0.5768,
+      "tokens_per_step": 2.178,
+      "theory_tokens_per_step": 2.2120867037310976,
+      "baseline_tpot_ms": 35.857965079476195,
+      "spec_tpot_ms": 49.56358492061207,
+      "speedup": 0.7003739367126066
+    },
+    {
+      "residual_scale": 0.05,
+      "k": 2,
+      "acceptance_rate": 0.4922,
+      "alpha": 0.6048,
+      "tokens_per_step": 1.9845,
+      "theory_tokens_per_step": 1.9705830400000002,
+      "baseline_tpot_ms": 39.88565238089197,
+      "spec_tpot_ms": 38.93301746032352,
+      "speedup": 1.120352108883684
+    },
+    {
+      "residual_scale": 0.05,
+      "k": 4,
+      "acceptance_rate": 0.3458,
+      "alpha": 0.6271,
+      "tokens_per_step": 2.3832,
+      "theory_tokens_per_step": 2.421613281495448,
+      "baseline_tpot_ms": 39.88565238089197,
+      "spec_tpot_ms": 46.06198095233782,
+      "speedup": 0.9530296523297777
+    },
+    {
+      "residual_scale": 0.03,
+      "k": 2,
+      "acceptance_rate": 0.6822,
+      "alpha": 0.7684,
+      "tokens_per_step": 2.3645,
+      "theory_tokens_per_step": 2.35883856,
+      "baseline_tpot_ms": 39.670268253960074,
+      "spec_tpot_ms": 33.39594047625608,
+      "speedup": 1.263841276936911
+    },
+    {
+      "residual_scale": 0.03,
+      "k": 4,
+      "acceptance_rate": 0.5406,
+      "alpha": 0.7621,
+      "tokens_per_step": 3.1625,
+      "theory_tokens_per_step": 3.122845823929888,
+      "baseline_tpot_ms": 39.670268253960074,
+      "spec_tpot_ms": 34.71185238098741,
+      "speedup": 1.1993544750710672
+    }
+  ],
+  "quant_accuracy": [
+    {
+      "mode": "fp32",
+      "ppl": 34.808329499029156,
+      "top1_agreement": 1.0,
+      "kl_divergence": 0.0,
+      "weights_mib": 99.525390625
+    },
+    {
+      "mode": "int8-rtn",
+      "ppl": 34.91171490255574,
+      "top1_agreement": 0.96435546875,
+      "kl_divergence": 0.0017003326211124659,
+      "weights_mib": 49.01171875
+    },
+    {
+      "mode": "int8-awq",
+      "ppl": 34.91510008531343,
+      "top1_agreement": 0.962890625,
+      "kl_divergence": 0.0016906382516026497,
+      "weights_mib": 49.1064453125
+    },
+    {
+      "mode": "int4-g128-rtn",
+      "ppl": 46.600801213821796,
+      "top1_agreement": 0.56298828125,
+      "kl_divergence": 0.30484023690223694,
+      "weights_mib": 41.1220703125
+    },
+    {
+      "mode": "int4-g128-awq",
+      "ppl": 46.31181325950937,
+      "top1_agreement": 0.5791015625,
+      "kl_divergence": 0.30290311574935913,
+      "weights_mib": 41.22265625
+    },
+    {
+      "mode": "int4-g32-rtn",
+      "ppl": 43.02788481692181,
+      "top1_agreement": 0.6396484375,
+      "kl_divergence": 0.19709144532680511,
+      "weights_mib": 43.099609375
+    },
+    {
+      "mode": "int4-g32-awq",
+      "ppl": 42.98231210855818,
+      "top1_agreement": 0.63671875,
+      "kl_divergence": 0.20377804338932037,
+      "weights_mib": 43.2021484375
+    }
+  ],
+  "roofline": [
+    {
+      "gpu": "L4",
+      "weights": "fp16",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 377.3036652586029,
+      "usd_per_1m": 0.5889744592592593
+    },
+    {
+      "gpu": "L4",
+      "weights": "fp16",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 245.2473824180919,
+      "usd_per_1m": 0.906114552706553
+    },
+    {
+      "gpu": "L4",
+      "weights": "int8",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 623.1256380806534,
+      "usd_per_1m": 0.3566250666666667
+    },
+    {
+      "gpu": "L4",
+      "weights": "int8",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 112.31874174255651,
+      "usd_per_1m": 1.9784963646723648
+    },
+    {
+      "gpu": "L4",
+      "weights": "int4",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 873.5447815487663,
+      "usd_per_1m": 0.25439133392592594
+    },
+    {
+      "gpu": "L4",
+      "weights": "int4",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 122.01875175566839,
+      "usd_per_1m": 1.8212136989173788
+    },
+    {
+      "gpu": "A100-80G",
+      "weights": "fp16",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 2515.357768390686,
+      "usd_per_1m": 0.40528804977777777
+    },
+    {
+      "gpu": "A100-80G",
+      "weights": "fp16",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 1634.982549453946,
+      "usd_per_1m": 0.6235200765811967
+    },
+    {
+      "gpu": "A100-80G",
+      "weights": "int8",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 4154.170920537689,
+      "usd_per_1m": 0.245402624
+    },
+    {
+      "gpu": "A100-80G",
+      "weights": "int8",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 748.7916116170434,
+      "usd_per_1m": 1.361452810940171
+    },
+    {
+      "gpu": "A100-80G",
+      "weights": "int4",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 5823.631876991775,
+      "usd_per_1m": 0.17505303665777777
+    },
+    {
+      "gpu": "A100-80G",
+      "weights": "int4",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 813.4583450377893,
+      "usd_per_1m": 1.2532226765675212
+    },
+    {
+      "gpu": "H100",
+      "weights": "fp16",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 4213.224262054399,
+      "usd_per_1m": 0.46019123794361527
+    },
+    {
+      "gpu": "H100",
+      "weights": "fp16",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 2738.5957703353597,
+      "usd_per_1m": 0.7079865199132542
+    },
+    {
+      "gpu": "H100",
+      "weights": "int8",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 6958.23629190063,
+      "usd_per_1m": 0.27864660059701496
+    },
+    {
+      "gpu": "H100",
+      "weights": "int8",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 1254.2259494585476,
+      "usd_per_1m": 1.5458848461283328
+    },
+    {
+      "gpu": "H100",
+      "weights": "int4",
+      "impl": "vllm (fused CUDA kernels)",
+      "tok_s": 9754.583393961224,
+      "usd_per_1m": 0.1987669601645108
+    },
+    {
+      "gpu": "H100",
+      "weights": "int4",
+      "impl": "kvforge (torch reference path)",
+      "tok_s": 1362.542727938297,
+      "usd_per_1m": 1.4229930916167879
+    }
+  ]
+}
