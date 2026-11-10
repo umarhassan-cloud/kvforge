@@ -1,6 +1,6 @@
 import pytest
 
-from pulsecache.cache.block_manager import BlockManager, NoFreeBlocksError
+from tokenvault.cache.block_manager import BlockManager, NoFreeBlocksError
 
 
 def test_allocate_and_free_roundtrip():

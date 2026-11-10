@@ -25,9 +25,9 @@ import itertools
 import time
 from dataclasses import dataclass, field
 
-from pulsecache.batching.request import FinishReason, Request, RequestStatus
-from pulsecache.cache.block_manager import BlockManager
-from pulsecache.config import SchedulerConfig, SchedulingPolicy
+from tokenvault.batching.request import FinishReason, Request, RequestStatus
+from tokenvault.cache.block_manager import BlockManager
+from tokenvault.config import SchedulerConfig, SchedulingPolicy
 
 
 @dataclass

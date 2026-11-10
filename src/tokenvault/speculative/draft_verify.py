@@ -25,10 +25,10 @@ from dataclasses import dataclass, field, replace
 import torch
 from torch import nn
 
-from pulsecache.batching.continuous import BatchItem, ModelRunner
-from pulsecache.batching.request import Request
-from pulsecache.model import Transformer
-from pulsecache.sampling import Sampler, logits_to_probs, sample_from_probs
+from tokenvault.batching.continuous import BatchItem, ModelRunner
+from tokenvault.batching.request import Request
+from tokenvault.model import Transformer
+from tokenvault.sampling import Sampler, logits_to_probs, sample_from_probs
 
 
 def rejection_sample(

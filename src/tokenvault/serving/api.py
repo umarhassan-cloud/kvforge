@@ -25,11 +25,11 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from pulsecache.batching.request import RequestOutput
-from pulsecache.engine import InferenceEngine
-from pulsecache.metrics import CostModel
-from pulsecache.sampling import SamplingParams
-from pulsecache.scheduler import RequestRejectedError
+from tokenvault.batching.request import RequestOutput
+from tokenvault.engine import InferenceEngine
+from tokenvault.metrics import CostModel
+from tokenvault.sampling import SamplingParams
+from tokenvault.scheduler import RequestRejectedError
 
 
 class AsyncEngine:
@@ -95,7 +95,7 @@ class AsyncEngine:
 
 
 class _GenParams(BaseModel):
-    model: str = "pulsecache"
+    model: str = "tokenvault"
     max_tokens: int = Field(default=64, ge=1)
     temperature: float = Field(default=1.0, ge=0.0)
     top_p: float = Field(default=1.0, gt=0.0, le=1.0)
@@ -134,7 +134,7 @@ def _usage(out: RequestOutput) -> dict[str, int]:
 
 
 def create_app(
-    engine: InferenceEngine, model_name: str = "pulsecache", cost: CostModel | None = None
+    engine: InferenceEngine, model_name: str = "tokenvault", cost: CostModel | None = None
 ) -> FastAPI:
     async_engine = AsyncEngine(engine)
 
@@ -144,7 +144,7 @@ def create_app(
         yield
         await async_engine.stop()
 
-    app = FastAPI(title="pulsecache", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="tokenvault", version="0.1.0", lifespan=lifespan)
     app.state.engine = async_engine
 
     def decode(ids: list[int]) -> str:
@@ -199,7 +199,7 @@ def create_app(
 
     @app.get("/v1/models")
     async def models() -> dict[str, Any]:
-        return {"object": "list", "data": [{"id": model_name, "object": "model", "owned_by": "pulsecache"}]}
+        return {"object": "list", "data": [{"id": model_name, "object": "model", "owned_by": "tokenvault"}]}
 
     @app.post("/v1/completions", response_model=None)
     async def completions(req: CompletionRequest) -> dict[str, Any] | StreamingResponse:

@@ -1,4 +1,4 @@
-"""Launch the OpenAI-compatible pulsecache server.
+"""Launch the OpenAI-compatible tokenvault server.
 
 Examples::
 
@@ -16,7 +16,7 @@ import argparse
 
 import torch
 
-from pulsecache import (
+from tokenvault import (
     PRESETS,
     AttentionBackend,
     ByteTokenizer,
@@ -30,9 +30,9 @@ from pulsecache import (
     build_model,
     load_hf_model,
 )
-from pulsecache.metrics import GPU_PRICES
-from pulsecache.model_loader import HFTokenizer
-from pulsecache.serving import create_app
+from tokenvault.metrics import GPU_PRICES
+from tokenvault.model_loader import HFTokenizer
+from tokenvault.serving import create_app
 
 DTYPES = {"float32": torch.float32, "float16": torch.float16, "bfloat16": torch.bfloat16}
 
@@ -70,7 +70,7 @@ def main() -> None:
     else:
         model = build_model(args.preset, args.device, dtype)
         tokenizer = ByteTokenizer()
-        name = f"pulsecache-{args.preset}-random"
+        name = f"tokenvault-{args.preset}-random"
 
     config = EngineConfig(
         model=model.config,
@@ -94,7 +94,7 @@ def main() -> None:
     engine = InferenceEngine(config, model=model, tokenizer=tokenizer)
     kv = engine.kv_cache
     print(
-        f"pulsecache: model={name} blocks={kv.num_blocks}x{kv.block_size} "
+        f"tokenvault: model={name} blocks={kv.num_blocks}x{kv.block_size} "
         f"kv={kv.memory_bytes / 2**20:.1f} MiB device={args.device}"
     )
     uvicorn.run(create_app(engine, name, GPU_PRICES[args.gpu_price]), host=args.host, port=args.port)

@@ -2,9 +2,9 @@ import pytest
 import torch
 from torch import nn
 
-from pulsecache import InferenceEngine, QuantConfig, QuantMode, SamplingParams, build_model
-from pulsecache.model_loader import PRESETS
-from pulsecache.quant import (
+from tokenvault import InferenceEngine, QuantConfig, QuantMode, SamplingParams, build_model
+from tokenvault.model_loader import PRESETS
+from tokenvault.quant import (
     Int4Linear,
     Int8Linear,
     awq_search_scale,
@@ -18,7 +18,7 @@ from pulsecache.quant import (
     unpack_int4,
     weight_memory_bytes,
 )
-from pulsecache.quant.int4 import resolve_group_size
+from tokenvault.quant.int4 import resolve_group_size
 
 from .conftest import make_config
 

@@ -3,7 +3,7 @@
 ## Module map
 
 ```
-src/pulsecache/
+src/tokenvault/
 ├── config.py               typed dataclass configs for every subsystem
 ├── engine.py               InferenceEngine: the step() loop that wires everything
 ├── model.py                Llama/Gemma decoder; paged forward + dense (HF-style) forward

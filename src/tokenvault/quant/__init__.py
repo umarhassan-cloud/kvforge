@@ -1,4 +1,4 @@
-from pulsecache.quant.calibrate import (
+from tokenvault.quant.calibrate import (
     awq_search_scale,
     collect_linear_inputs,
     evaluate_perplexity,
@@ -6,8 +6,8 @@ from pulsecache.quant.calibrate import (
     quantize_model,
     weight_memory_bytes,
 )
-from pulsecache.quant.int4 import Int4Linear, dequantize_int4, pack_int4, quantize_int4, unpack_int4
-from pulsecache.quant.int8 import Int8Linear, dequantize_int8, quantize_int8
+from tokenvault.quant.int4 import Int4Linear, dequantize_int4, pack_int4, quantize_int4, unpack_int4
+from tokenvault.quant.int8 import Int8Linear, dequantize_int8, quantize_int8
 
 __all__ = [
     "Int4Linear",

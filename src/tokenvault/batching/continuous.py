@@ -2,7 +2,7 @@
 (prefill chunks, decodes, speculative verifies) into ONE flat varlen forward pass.
 
 There is no padding along the token dimension: ``input_ids`` is the concatenation of
-every item's tokens, and :class:`~pulsecache.cache.AttentionMetadata` tells attention
+every item's tokens, and :class:`~tokenvault.cache.AttentionMetadata` tells attention
 where each sequence begins and which physical blocks hold its context. This is what
 lets new requests join a running batch at any iteration without recompiling shapes
 or padding everyone to the longest prompt.
@@ -16,10 +16,10 @@ from typing import Literal
 
 import torch
 
-from pulsecache.cache.block_manager import BlockManager
-from pulsecache.cache.kv_cache import PagedKVCache
-from pulsecache.cache.paged_attention import AttentionMetadata
-from pulsecache.model import Transformer
+from tokenvault.cache.block_manager import BlockManager
+from tokenvault.cache.kv_cache import PagedKVCache
+from tokenvault.cache.paged_attention import AttentionMetadata
+from tokenvault.model import Transformer
 
 LogitsMode = Literal["last", "all", "none"]
 

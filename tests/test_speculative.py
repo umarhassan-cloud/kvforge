@@ -1,9 +1,9 @@
 import pytest
 import torch
 
-from pulsecache import InferenceEngine, SamplingParams, SpeculativeConfig, build_model
-from pulsecache.model_loader import PRESETS
-from pulsecache.speculative import make_layer_skip_draft, rejection_sample
+from tokenvault import InferenceEngine, SamplingParams, SpeculativeConfig, build_model
+from tokenvault.model_loader import PRESETS
+from tokenvault.speculative import make_layer_skip_draft, rejection_sample
 
 from .conftest import dense_greedy, make_config
 

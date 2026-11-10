@@ -3,9 +3,9 @@ requires = ["hatchling>=1.21"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pulsecache"
+name = "tokenvault"
 version = "0.1.0"
-description = "PulseCache — paged KV-cache LLM inference engine with continuous batching, speculative decoding, and INT8/INT4 quantization."
+description = "TokenVault — paged KV-cache LLM inference engine with continuous batching, speculative decoding, and INT8/INT4 quantization."
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.10"
@@ -31,11 +31,11 @@ hf = ["transformers>=4.40", "safetensors>=0.4"]
 dev = ["pytest>=7.4", "ruff>=0.4", "httpx>=0.27", "fastapi>=0.110", "pydantic>=2.5"]
 
 [project.urls]
-Homepage = "https://github.com/umarhassan-cloud/pulsecache"
-Documentation = "https://github.com/umarhassan-cloud/pulsecache/blob/main/DESIGN.md"
+Homepage = "https://github.com/umarhassan-cloud/tokenvault"
+Documentation = "https://github.com/umarhassan-cloud/tokenvault/blob/main/DESIGN.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pulsecache"]
+packages = ["src/tokenvault"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -61,4 +61,4 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["pulsecache"]
+known-first-party = ["tokenvault"]

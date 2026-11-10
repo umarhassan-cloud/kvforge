@@ -74,7 +74,7 @@ The benchmark sweep reports measured tokens/step next to this formula.
   structured output, low temperature).
 * At **large batch** the target is already closer to compute-bound; verifying `k + 1` tokens
   per sequence is no longer free, and spending batch slots on likely-rejected tokens can reduce
-  throughput. Production systems disable or shrink `k` as batch size grows; pulsecache exposes `k`
+  throughput. Production systems disable or shrink `k` as batch size grows; tokenvault exposes `k`
   per engine and clamps it per step, adaptive `k` is on the roadmap.
 * On **CPU** the verify forward is compute-bound, so the "k+1 tokens for the price of 1"
   premise only partially holds; the benchmark report quantifies this.

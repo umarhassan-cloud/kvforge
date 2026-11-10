@@ -3,10 +3,10 @@ import random
 import pytest
 import torch
 
-from pulsecache.cache.block_manager import BlockManager
-from pulsecache.cache.kv_cache import PagedKVCache
-from pulsecache.cache.paged_attention import AttentionMetadata, paged_attention, reference_attention
-from pulsecache.kernels.attention import paged_attention_online
+from tokenvault.cache.block_manager import BlockManager
+from tokenvault.cache.kv_cache import PagedKVCache
+from tokenvault.cache.paged_attention import AttentionMetadata, paged_attention, reference_attention
+from tokenvault.kernels.attention import paged_attention_online
 
 H, KVH, D, BS = 4, 2, 8, 4
 
@@ -92,7 +92,7 @@ def test_copy_blocks():
 
 def test_paged_model_forward_matches_dense(tiny_model):
     """Full transformer: paged prefill + decode logits == dense recomputation logits."""
-    from pulsecache.batching.continuous import BatchItem, ModelRunner
+    from tokenvault.batching.continuous import BatchItem, ModelRunner
 
     m = tiny_model
     cfg = m.config

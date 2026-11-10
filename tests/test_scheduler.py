@@ -1,10 +1,10 @@
 import pytest
 
-from pulsecache.batching.request import FinishReason, Request, RequestStatus
-from pulsecache.cache.block_manager import BlockManager
-from pulsecache.config import SchedulerConfig, SchedulingPolicy
-from pulsecache.sampling import SamplingParams
-from pulsecache.scheduler import RequestRejectedError, Scheduler
+from tokenvault.batching.request import FinishReason, Request, RequestStatus
+from tokenvault.cache.block_manager import BlockManager
+from tokenvault.config import SchedulerConfig, SchedulingPolicy
+from tokenvault.sampling import SamplingParams
+from tokenvault.scheduler import RequestRejectedError, Scheduler
 
 
 def make(num_blocks=64, block_size=4, lookahead=0, **cfg) -> Scheduler:

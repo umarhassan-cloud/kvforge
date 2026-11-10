@@ -1,9 +1,9 @@
-"""Reproducible pulsecache benchmark suite.
+"""Reproducible tokenvault benchmark suite.
 
 Modes (same weights, same workload, same greedy decoding):
 
     naive        HF-style static batching + padded contiguous KV (benchmarks/baselines.py)
-    continuous   pulsecache paged KV + iteration-level continuous batching
+    continuous   tokenvault paged KV + iteration-level continuous batching
     speculative  continuous + draft/verify speculative decoding (layer-skip self-draft)
     int8 / int4  continuous + weight-only quantization (AWQ-calibrated)
 
@@ -41,7 +41,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT.parent / "src"))
 
 from baselines import BaselineRequest, naive_static_generate  # noqa: E402
-from pulsecache import (  # noqa: E402
+from tokenvault import (  # noqa: E402
     PRESETS,
     CacheConfig,
     EngineConfig,
@@ -54,8 +54,8 @@ from pulsecache import (  # noqa: E402
     Transformer,
     build_model,
 )
-from pulsecache.metrics import GPU_PRICES, CostModel, percentile  # noqa: E402
-from pulsecache.quant import evaluate_perplexity, logit_fidelity, quantize_model, weight_memory_bytes  # noqa: E402
+from tokenvault.metrics import GPU_PRICES, CostModel, percentile  # noqa: E402
+from tokenvault.quant import evaluate_perplexity, logit_fidelity, quantize_model, weight_memory_bytes  # noqa: E402
 
 DTYPES = {"float32": torch.float32, "float16": torch.float16, "bfloat16": torch.bfloat16}
 
@@ -128,7 +128,7 @@ def run_engine(engine: InferenceEngine, wl: Workload, cost: CostModel) -> dict:
     engine.metrics.reset()
     engine.runner.num_forward_passes = 0
     if engine.spec is not None:
-        from pulsecache.speculative import SpecDecodeStats
+        from tokenvault.speculative import SpecDecodeStats
 
         engine.spec.stats = SpecDecodeStats()
     peak_blocks = 0
@@ -290,15 +290,15 @@ def roofline(batch: int = 32, context: int = 1024) -> list[dict]:
     kv_tok = 2 * cfg.num_layers * cfg.num_kv_heads * cfg.head_dim * 2
     n = cfg.num_params
     # HBM bytes moved per decode step for the weights. Fused kernels (vLLM: Marlin / CUTLASS)
-    # read the packed weights once. pulsecache's reference path reads the packed weights, writes
+    # read the packed weights once. tokenvault's reference path reads the packed weights, writes
     # an fp16 temporary, then the GEMM reads it back: packed + 2 + 2 bytes per parameter.
     weight_bytes = {
         "vllm (fused CUDA kernels)": {"fp16": 2.0 * n, "int8": 1.0 * n, "int4": 0.56 * n},
-        "pulsecache (torch reference path)": {"fp16": 2.0 * n, "int8": 5.0 * n, "int4": 4.56 * n},
+        "tokenvault (torch reference path)": {"fp16": 2.0 * n, "int8": 5.0 * n, "int4": 4.56 * n},
     }
     gpus = {"L4": (300e9, GPU_PRICES["l4"]), "A100-80G": (2.0e12, GPU_PRICES["a100-80g"]),
             "H100": (3.35e12, GPU_PRICES["h100"])}
-    eff = {"vllm (fused CUDA kernels)": 0.80, "pulsecache (torch reference path)": 0.52}
+    eff = {"vllm (fused CUDA kernels)": 0.80, "tokenvault (torch reference path)": 0.52}
     rows = []
     for gpu, (bw, price) in gpus.items():
         for wname in ("fp16", "int8", "int4"):
@@ -366,7 +366,7 @@ def main() -> None:
         "gpu": torch.cuda.get_device_name() if args.device.startswith("cuda") else None,
         "preset": args.preset, "params_m": PRESETS[args.preset].num_params / 1e6,
     }
-    print(f"# pulsecache benchmark\n\n```\n{json.dumps(env)}\n```\n", flush=True)
+    print(f"# tokenvault benchmark\n\n```\n{json.dumps(env)}\n```\n", flush=True)
     report: dict = {"env": env, "args": vars(args)}
 
     modes = bench_modes(args, cost)

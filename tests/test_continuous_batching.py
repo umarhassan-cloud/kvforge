@@ -3,7 +3,7 @@ import random
 import pytest
 import torch
 
-from pulsecache import (
+from tokenvault import (
     AttentionBackend,
     CacheConfig,
     InferenceEngine,
@@ -11,8 +11,8 @@ from pulsecache import (
     SamplingParams,
     SchedulerConfig,
 )
-from pulsecache.batching.continuous import BatchItem, prepare_inputs
-from pulsecache.cache.block_manager import BlockManager
+from tokenvault.batching.continuous import BatchItem, prepare_inputs
+from tokenvault.cache.block_manager import BlockManager
 
 from .conftest import dense_greedy, make_config
 
@@ -158,7 +158,7 @@ def test_sampling_is_reproducible_with_seed(tiny_model):
 
 
 def test_top_p_top_k_masking():
-    from pulsecache.sampling import logits_to_probs
+    from tokenvault.sampling import logits_to_probs
 
     logits = torch.tensor([[4.0, 3.0, 2.0, 1.0, 0.0]])
     p = logits_to_probs(logits, [SamplingParams(top_k=2)])

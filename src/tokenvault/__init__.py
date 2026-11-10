@@ -1,11 +1,11 @@
-"""pulsecache: a from-scratch LLM inference engine.
+"""tokenvault: a from-scratch LLM inference engine.
 
 Paged KV cache, continuous batching, speculative decoding and weight-only
 INT8/INT4 quantization in readable PyTorch.
 """
 
-from pulsecache.batching.request import FinishReason, Request, RequestOutput, RequestStatus
-from pulsecache.config import (
+from tokenvault.batching.request import FinishReason, Request, RequestOutput, RequestStatus
+from tokenvault.config import (
     AttentionBackend,
     CacheConfig,
     EngineConfig,
@@ -16,10 +16,10 @@ from pulsecache.config import (
     SchedulingPolicy,
     SpeculativeConfig,
 )
-from pulsecache.engine import InferenceEngine
-from pulsecache.model import Transformer
-from pulsecache.model_loader import PRESETS, ByteTokenizer, build_model, load_hf_model
-from pulsecache.sampling import SamplingParams
+from tokenvault.engine import InferenceEngine
+from tokenvault.model import Transformer
+from tokenvault.model_loader import PRESETS, ByteTokenizer, build_model, load_hf_model
+from tokenvault.sampling import SamplingParams
 
 __version__ = "0.1.0"
 

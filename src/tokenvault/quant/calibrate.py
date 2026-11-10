@@ -18,10 +18,10 @@ from collections.abc import Callable, Iterable
 import torch
 from torch import nn
 
-from pulsecache.config import QuantConfig, QuantMode
-from pulsecache.model import Transformer
-from pulsecache.quant.int4 import Int4Linear, dequantize_int4, quantize_int4
-from pulsecache.quant.int8 import Int8Linear, dequantize_int8, quantize_int8
+from tokenvault.config import QuantConfig, QuantMode
+from tokenvault.model import Transformer
+from tokenvault.quant.int4 import Int4Linear, dequantize_int4, quantize_int4
+from tokenvault.quant.int8 import Int8Linear, dequantize_int8, quantize_int8
 
 PROJECTIONS = ("q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj")
 
