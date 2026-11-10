@@ -1,10 +1,10 @@
 import pytest
 
-from kvforge.batching.request import FinishReason, Request, RequestStatus
-from kvforge.cache.block_manager import BlockManager
-from kvforge.config import SchedulerConfig, SchedulingPolicy
-from kvforge.sampling import SamplingParams
-from kvforge.scheduler import RequestRejectedError, Scheduler
+from pulsecache.batching.request import FinishReason, Request, RequestStatus
+from pulsecache.cache.block_manager import BlockManager
+from pulsecache.config import SchedulerConfig, SchedulingPolicy
+from pulsecache.sampling import SamplingParams
+from pulsecache.scheduler import RequestRejectedError, Scheduler
 
 
 def make(num_blocks=64, block_size=4, lookahead=0, **cfg) -> Scheduler:

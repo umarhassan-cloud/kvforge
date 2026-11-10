@@ -16,7 +16,7 @@ import time
 from dataclasses import dataclass, field
 from enum import Enum
 
-from kvforge.sampling import SamplingParams
+from pulsecache.sampling import SamplingParams
 
 
 class RequestStatus(str, Enum):

@@ -1,4 +1,4 @@
-"""Typed configuration objects for every kvforge subsystem.
+"""Typed configuration objects for every pulsecache subsystem.
 
 All configs are plain dataclasses so they serialize trivially (``dataclasses.asdict``)
 into benchmark reports and can be constructed from CLI flags without a framework.

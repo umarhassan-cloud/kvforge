@@ -1,6 +1,6 @@
 """Attention backends.
 
-``gather``  — :func:`kvforge.cache.paged_attention.paged_attention`: materializes
+``gather``  — :func:`pulsecache.cache.paged_attention.paged_attention`: materializes
               the full gathered context (simple, fast for short contexts on CPU).
 ``online``  — :func:`paged_attention_online`: streams the block table in chunks
               with a numerically-stable online softmax (Milakov & Gimelshein 2018,
@@ -15,8 +15,8 @@ from collections.abc import Callable
 
 import torch
 
-from kvforge.cache.paged_attention import AttentionMetadata, pad_queries, paged_attention
-from kvforge.config import AttentionBackend
+from pulsecache.cache.paged_attention import AttentionMetadata, pad_queries, paged_attention
+from pulsecache.config import AttentionBackend
 
 AttentionFn = Callable[
     [torch.Tensor, torch.Tensor, torch.Tensor, AttentionMetadata, float], torch.Tensor

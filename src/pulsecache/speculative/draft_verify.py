@@ -25,10 +25,10 @@ from dataclasses import dataclass, field, replace
 import torch
 from torch import nn
 
-from kvforge.batching.continuous import BatchItem, ModelRunner
-from kvforge.batching.request import Request
-from kvforge.model import Transformer
-from kvforge.sampling import Sampler, logits_to_probs, sample_from_probs
+from pulsecache.batching.continuous import BatchItem, ModelRunner
+from pulsecache.batching.request import Request
+from pulsecache.model import Transformer
+from pulsecache.sampling import Sampler, logits_to_probs, sample_from_probs
 
 
 def rejection_sample(

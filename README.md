@@ -1,8 +1,10 @@
-﻿# kvforge
+﻿# PulseCache
 
-**A from-scratch LLM inference engine in readable PyTorch. It implements paged KV cache, continuous batching, lossless speculative decoding and INT8/INT4 weight quantization, with a test suite that holds every optimization bit-exact against a naive oracle.**
+> Paged KV-cache inference that pulses tokens through continuous batches — fast, dense, production-shaped.
 
-[![CI](https://github.com/umarhassan-cloud/kvforge/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
+**A from-scratch LLM inference engine in readable PyTorch.** It implements paged KV cache, continuous batching, lossless speculative decoding and INT8/INT4 weight quantization, with a test suite that holds every optimization bit-exact against a naive oracle.
+
+[![CI](https://github.com/umarhassan-cloud/pulsecache/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
 ![python](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12-blue)
 ![license](https://img.shields.io/badge/license-Apache--2.0-green)
 
@@ -64,7 +66,7 @@ them back through block tables. See [docs/architecture.md](docs/architecture.md)
 ## Quickstart
 
 ```bash
-git clone https://github.com/umarhassan-cloud/kvforge && cd kvforge
+git clone https://github.com/umarhassan-cloud/pulsecache && cd pulsecache
 pip install -e ".[dev,serve]"          # torch, numpy, fastapi, pytest, ruff
 pytest                                  # 68 tests, ~1 min on CPU, no downloads
 ```
@@ -72,7 +74,7 @@ pytest                                  # 68 tests, ~1 min on CPU, no downloads
 **Python API**
 
 ```python
-from kvforge import (InferenceEngine, EngineConfig, CacheConfig, SchedulerConfig,
+from pulsecache import (InferenceEngine, EngineConfig, CacheConfig, SchedulerConfig,
                      SpeculativeConfig, QuantConfig, QuantMode, SamplingParams, PRESETS)
 
 engine = InferenceEngine(EngineConfig(
@@ -114,9 +116,9 @@ decoding. Full methodology is in the [report](benchmarks/BENCHMARK_REPORT.md).
 | mode | out tok/s | vs naive | TTFT p50 | TPOT p50 | peak KV | $/1M tok* |
 |---|---:|---:|---:|---:|---:|---:|
 | naive (HF-style static batching) | 59.6 | 1.00× | 19.2 s | 228 ms | 47.1 MiB | 1.86 |
-| **kvforge continuous** | **84.6** | **1.42×** | **9.3 s** | **158 ms** | **24.9 MiB** | **1.31** |
-| kvforge + speculative (k=4, α=0.67) | 78.5 | 1.32× | 10.4 s | 171 ms | 25.5 MiB | 1.41 |
-| kvforge + INT8 | 66.4 | 1.11× | 12.6 s | 207 ms | 24.9 MiB | 1.67 |
+| **pulsecache continuous** | **84.6** | **1.42×** | **9.3 s** | **158 ms** | **24.9 MiB** | **1.31** |
+| pulsecache + speculative (k=4, α=0.67) | 78.5 | 1.32× | 10.4 s | 171 ms | 25.5 MiB | 1.41 |
+| pulsecache + INT8 | 66.4 | 1.11× | 12.6 s | 207 ms | 24.9 MiB | 1.67 |
 
 <sub>*at $0.40/h CPU. TTFT includes queueing behind a 48-request burst.</sub>
 
@@ -139,7 +141,7 @@ speed win needs a fused kernel. This is item #1 in the gap analysis.
 ## Repository layout
 
 ```
-src/kvforge/
+src/pulsecache/
   engine.py            InferenceEngine: scheduler + runner + speculative + quant
   scheduler.py         iteration-level scheduling, admission control, preemption
   cache/               block_manager.py · kv_cache.py · paged_attention.py

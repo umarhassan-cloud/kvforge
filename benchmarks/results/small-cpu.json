@@ -296,7 +296,7 @@
     {
       "gpu": "L4",
       "weights": "fp16",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 245.2473824180919,
       "usd_per_1m": 0.906114552706553
     },
@@ -310,7 +310,7 @@
     {
       "gpu": "L4",
       "weights": "int8",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 112.31874174255651,
       "usd_per_1m": 1.9784963646723648
     },
@@ -324,7 +324,7 @@
     {
       "gpu": "L4",
       "weights": "int4",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 122.01875175566839,
       "usd_per_1m": 1.8212136989173788
     },
@@ -338,7 +338,7 @@
     {
       "gpu": "A100-80G",
       "weights": "fp16",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 1634.982549453946,
       "usd_per_1m": 0.6235200765811967
     },
@@ -352,7 +352,7 @@
     {
       "gpu": "A100-80G",
       "weights": "int8",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 748.7916116170434,
       "usd_per_1m": 1.361452810940171
     },
@@ -366,7 +366,7 @@
     {
       "gpu": "A100-80G",
       "weights": "int4",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 813.4583450377893,
       "usd_per_1m": 1.2532226765675212
     },
@@ -380,7 +380,7 @@
     {
       "gpu": "H100",
       "weights": "fp16",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 2738.5957703353597,
       "usd_per_1m": 0.7079865199132542
     },
@@ -394,7 +394,7 @@
     {
       "gpu": "H100",
       "weights": "int8",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 1254.2259494585476,
       "usd_per_1m": 1.5458848461283328
     },
@@ -408,7 +408,7 @@
     {
       "gpu": "H100",
       "weights": "int4",
-      "impl": "kvforge (torch reference path)",
+      "impl": "pulsecache (torch reference path)",
       "tok_s": 1362.542727938297,
       "usd_per_1m": 1.4229930916167879
     }

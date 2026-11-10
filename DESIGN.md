@@ -1,4 +1,4 @@
-# kvforge design doc
+# pulsecache design doc
 
 | | |
 |---|---|
@@ -20,7 +20,7 @@ Serving an LLM is a **memory-bandwidth and memory-capacity problem**, not a FLOP
 * **Static batching wastes compute.** With `generate()`-style batching, a batch runs until its
   longest member finishes; short requests idle in padded slots and new requests queue.
 
-kvforge implements the four techniques that production engines (vLLM, TGI, TensorRT-LLM, SGLang)
+pulsecache implements the four techniques that production engines (vLLM, TGI, TensorRT-LLM, SGLang)
 use to attack these, from scratch and in readable PyTorch, with tests that pin down correctness.
 
 ## 2. Requirements
@@ -136,7 +136,7 @@ dequantize-then-GEMM, which saves memory but not time. The speed win requires a 
 
 ## 6. Performance model and known gaps vs vLLM
 
-On the same GPU we expect kvforge at roughly **60–70% of vLLM decode throughput** (estimate
+On the same GPU we expect pulsecache at roughly **60–70% of vLLM decode throughput** (estimate
 from the roofline model in the benchmark report, **not measured on a GPU in this repo**).
 The gap is kernels and host overhead, not algorithms:
 

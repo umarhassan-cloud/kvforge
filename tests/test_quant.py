@@ -2,9 +2,9 @@ import pytest
 import torch
 from torch import nn
 
-from kvforge import InferenceEngine, QuantConfig, QuantMode, SamplingParams, build_model
-from kvforge.model_loader import PRESETS
-from kvforge.quant import (
+from pulsecache import InferenceEngine, QuantConfig, QuantMode, SamplingParams, build_model
+from pulsecache.model_loader import PRESETS
+from pulsecache.quant import (
     Int4Linear,
     Int8Linear,
     awq_search_scale,
@@ -18,7 +18,7 @@ from kvforge.quant import (
     unpack_int4,
     weight_memory_bytes,
 )
-from kvforge.quant.int4 import resolve_group_size
+from pulsecache.quant.int4 import resolve_group_size
 
 from .conftest import make_config
 

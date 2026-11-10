@@ -1,6 +1,6 @@
 import pytest
 
-from kvforge.cache.block_manager import BlockManager, NoFreeBlocksError
+from pulsecache.cache.block_manager import BlockManager, NoFreeBlocksError
 
 
 def test_allocate_and_free_roundtrip():

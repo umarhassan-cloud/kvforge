@@ -1,9 +1,9 @@
 import pytest
 import torch
 
-from kvforge import InferenceEngine, SamplingParams, SpeculativeConfig, build_model
-from kvforge.model_loader import PRESETS
-from kvforge.speculative import make_layer_skip_draft, rejection_sample
+from pulsecache import InferenceEngine, SamplingParams, SpeculativeConfig, build_model
+from pulsecache.model_loader import PRESETS
+from pulsecache.speculative import make_layer_skip_draft, rejection_sample
 
 from .conftest import dense_greedy, make_config
 

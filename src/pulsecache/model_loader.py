@@ -1,7 +1,7 @@
 """Model construction: random-init presets for tests/benchmarks and HF checkpoint import.
 
 HF import maps ``LlamaForCausalLM`` / ``GemmaForCausalLM`` / ``MistralForCausalLM`` /
-``Qwen2``-style (bias-free) state dicts onto :class:`kvforge.model.Transformer`.
+``Qwen2``-style (bias-free) state dicts onto :class:`pulsecache.model.Transformer`.
 ``transformers`` is an optional dependency, imported lazily.
 """
 
@@ -11,8 +11,8 @@ from typing import Any, Protocol
 
 import torch
 
-from kvforge.config import AttentionBackend, ModelConfig
-from kvforge.model import Transformer
+from pulsecache.config import AttentionBackend, ModelConfig
+from pulsecache.model import Transformer
 
 PRESETS: dict[str, ModelConfig] = {
     # Unit tests: runs a full engine step in a few ms on CPU.
@@ -92,11 +92,11 @@ def load_hf_model(
     dtype: torch.dtype = torch.float32,
     backend: AttentionBackend = AttentionBackend.GATHER,
 ) -> Transformer:
-    """Load a Llama/Gemma-family HF checkpoint into a kvforge :class:`Transformer`."""
+    """Load a Llama/Gemma-family HF checkpoint into a pulsecache :class:`Transformer`."""
     try:
         from transformers import AutoConfig, AutoModelForCausalLM
     except ImportError as e:  # pragma: no cover - optional dependency
-        raise ImportError("pip install 'kvforge[hf]' to load Hugging Face checkpoints") from e
+        raise ImportError("pip install 'pulsecache[hf]' to load Hugging Face checkpoints") from e
 
     hf_cfg = AutoConfig.from_pretrained(name_or_path)
     cfg = config_from_hf(hf_cfg)

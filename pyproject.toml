@@ -3,9 +3,9 @@ requires = ["hatchling>=1.21"]
 build-backend = "hatchling.build"
 
 [project]
-name = "kvforge"
+name = "pulsecache"
 version = "0.1.0"
-description = "From-scratch LLM inference engine: paged KV cache, continuous batching, speculative decoding, INT8/INT4 quantization."
+description = "PulseCache — paged KV-cache LLM inference engine with continuous batching, speculative decoding, and INT8/INT4 quantization."
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.10"
@@ -31,11 +31,11 @@ hf = ["transformers>=4.40", "safetensors>=0.4"]
 dev = ["pytest>=7.4", "ruff>=0.4", "httpx>=0.27", "fastapi>=0.110", "pydantic>=2.5"]
 
 [project.urls]
-Homepage = "https://github.com/umarhassan-cloud/kvforge"
-Documentation = "https://github.com/umarhassan-cloud/kvforge/blob/main/DESIGN.md"
+Homepage = "https://github.com/umarhassan-cloud/pulsecache"
+Documentation = "https://github.com/umarhassan-cloud/pulsecache/blob/main/DESIGN.md"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/kvforge"]
+packages = ["src/pulsecache"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -61,4 +61,4 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["kvforge"]
+known-first-party = ["pulsecache"]

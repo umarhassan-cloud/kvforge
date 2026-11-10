@@ -5,8 +5,8 @@ pytest.importorskip("httpx")
 
 from fastapi.testclient import TestClient
 
-from kvforge import ByteTokenizer, InferenceEngine
-from kvforge.serving import create_app
+from pulsecache import ByteTokenizer, InferenceEngine
+from pulsecache.serving import create_app
 
 from .conftest import make_config
 

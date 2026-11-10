@@ -3,7 +3,7 @@ from __future__ import annotations
 import pytest
 import torch
 
-from kvforge import PRESETS, CacheConfig, EngineConfig, SchedulerConfig, build_model
+from pulsecache import PRESETS, CacheConfig, EngineConfig, SchedulerConfig, build_model
 
 torch.set_num_threads(1)  # tiny ops: thread fan-out costs more than it saves
 

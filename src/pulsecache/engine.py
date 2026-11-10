@@ -8,7 +8,7 @@ One ``step()`` = one scheduler decision + at most two forward groups:
   cache stays in sync;
 * **speculative group** — decoding sequences: k draft forwards + one target verify.
 
-The engine is synchronous and single-threaded by design; :mod:`kvforge.serving.api`
+The engine is synchronous and single-threaded by design; :mod:`pulsecache.serving.api`
 drives it from a background task.
 """
 
@@ -22,18 +22,18 @@ from typing import Any
 
 import torch
 
-from kvforge.batching.continuous import BatchItem, ModelRunner
-from kvforge.batching.request import FinishReason, Request, RequestOutput
-from kvforge.cache.block_manager import BlockManager
-from kvforge.cache.kv_cache import PagedKVCache
-from kvforge.config import EngineConfig, QuantMode
-from kvforge.metrics import CostModel, MetricsCollector
-from kvforge.model import Transformer
-from kvforge.model_loader import Tokenizer, build_model
-from kvforge.quant.calibrate import quantize_model, weight_memory_bytes
-from kvforge.sampling import Sampler, SamplingParams
-from kvforge.scheduler import ScheduledRequest, Scheduler
-from kvforge.speculative.draft_verify import SpeculativeDecoder, make_layer_skip_draft
+from pulsecache.batching.continuous import BatchItem, ModelRunner
+from pulsecache.batching.request import FinishReason, Request, RequestOutput
+from pulsecache.cache.block_manager import BlockManager
+from pulsecache.cache.kv_cache import PagedKVCache
+from pulsecache.config import EngineConfig, QuantMode
+from pulsecache.metrics import CostModel, MetricsCollector
+from pulsecache.model import Transformer
+from pulsecache.model_loader import Tokenizer, build_model
+from pulsecache.quant.calibrate import quantize_model, weight_memory_bytes
+from pulsecache.sampling import Sampler, SamplingParams
+from pulsecache.scheduler import ScheduledRequest, Scheduler
+from pulsecache.speculative.draft_verify import SpeculativeDecoder, make_layer_skip_draft
 
 
 class InferenceEngine:

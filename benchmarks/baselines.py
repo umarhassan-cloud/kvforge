@@ -1,4 +1,4 @@
-"""Baselines that kvforge is measured against.
+"""Baselines that pulsecache is measured against.
 
 ``naive_static_generate`` reproduces the HF ``model.generate()`` serving pattern:
 
@@ -8,7 +8,7 @@
 * **contiguous, growing KV** — ``torch.cat`` on every step (``DynamicCache`` semantics),
   so peak KV = ``batch * (max_prompt + max_new)`` regardless of actual lengths.
 
-It reuses the exact same :class:`kvforge.model.Transformer` weights through
+It reuses the exact same :class:`pulsecache.model.Transformer` weights through
 ``forward_dense`` so every difference in the numbers comes from the serving strategy.
 """
 
@@ -19,8 +19,8 @@ from dataclasses import dataclass, field
 
 import torch
 
-from kvforge.model import Transformer
-from kvforge.sampling import SamplingParams, logits_to_probs, sample_from_probs
+from pulsecache.model import Transformer
+from pulsecache.sampling import SamplingParams, logits_to_probs, sample_from_probs
 
 
 @dataclass

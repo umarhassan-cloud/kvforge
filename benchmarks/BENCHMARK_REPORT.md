@@ -1,4 +1,4 @@
-# kvforge benchmark report
+# pulsecache benchmark report
 
 > **Read this first: what is measured and what is not.**
 >
@@ -77,17 +77,17 @@ differences as noise.
 | mode | out tok/s | vs naive | TTFT p50 ms | TTFT p99 ms | TPOT p50 ms | E2E p99 ms | mean batch | peak KV MiB | weights MiB | $/1M tok |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | naive (HF-style static) | 59.6 | 1.00× | 19,246 | 36,210 | 227.8 | 50,763 | 16.0 | 47.1 | 99.5 | 1.86 |
-| **kvforge continuous** | **84.6** | **1.42×** | **9,340** | 27,401 | **157.6** | **35,654** | 13.0 | **24.9** | 99.5 | **1.31** |
-| kvforge + speculative (k=4) | 78.5 | 1.32× | 10,402 | 27,998 | 171.1 | 38,480 | 12.6 | 25.5 | 99.5 | 1.41 |
-| kvforge + INT8 | 66.4 | 1.11× | 12,590 | 34,770 | 206.7 | 45,336 | 13.0 | 24.9 | 49.1 | 1.67 |
-| kvforge + INT4 (g=128) | 40.2 | 0.68× | 19,441 | 53,811 | 336.5 | 74,580 | 13.0 | 24.9 | 41.2 | 2.76 |
+| **pulsecache continuous** | **84.6** | **1.42×** | **9,340** | 27,401 | **157.6** | **35,654** | 13.0 | **24.9** | 99.5 | **1.31** |
+| pulsecache + speculative (k=4) | 78.5 | 1.32× | 10,402 | 27,998 | 171.1 | 38,480 | 12.6 | 25.5 | 99.5 | 1.41 |
+| pulsecache + INT8 | 66.4 | 1.11× | 12,590 | 34,770 | 206.7 | 45,336 | 13.0 | 24.9 | 49.1 | 1.67 |
+| pulsecache + INT4 (g=128) | 40.2 | 0.68× | 19,441 | 53,811 | 336.5 | 74,580 | 13.0 | 24.9 | 41.2 | 2.76 |
 
 What the numbers show:
 
 * **Continuous batching: 1.42× throughput, 2.1× lower median TTFT, 1.9× less peak KV.** The
   static baseline spends **45% of its token computations** on left-padding or on rows that
   have already finished, and a new batch cannot start until the slowest request in the
-  current one finishes. All modes generate the same 3,026 tokens. kvforge refills
+  current one finishes. All modes generate the same 3,026 tokens. pulsecache refills
   a free slot on the next iteration. Its mean batch (13.0) is below the cap (16) only because
   the burst drains at the end.
 * **Speculative decoding at batch 16 is roughly neutral on CPU (0.93× of continuous).** With
@@ -198,13 +198,13 @@ tok/s = batch · efficiency · HBM_BW / (weight_bytes + batch · ctx · 128 KiB)
 **Assumptions:**
 
 * *Efficiency* = 0.80 for vLLM (fused paged-attention and GEMM kernels, CUDA graphs) and 0.52
-  for kvforge (two-pass gather attention, Python step overhead).
+  for pulsecache (two-pass gather attention, Python step overhead).
 * *Weight bytes per parameter:* fused kernels read the packed format once (2 / 1 / 0.56 B for
-  fp16 / INT8 / INT4). kvforge's reference path reads the packed weights, writes an fp16
+  fp16 / INT8 / INT4). pulsecache's reference path reads the packed weights, writes an fp16
   temporary and reads it back (2 / 5 / 4.56 B).
 * Prices: L4 $0.80/h, A100-80G $3.67/h, H100 $6.98/h (on-demand list prices).
 
-| GPU | weights | vLLM tok/s | kvforge tok/s | kvforge / vLLM | vLLM $/1M | kvforge $/1M |
+| GPU | weights | vLLM tok/s | pulsecache tok/s | pulsecache / vLLM | vLLM $/1M | pulsecache $/1M |
 |---|---|---:|---:|---:|---:|---:|
 | L4 | fp16 | 377 | 245 | 65% | 0.59 | 0.91 |
 | A100-80G | fp16 | 2,515 | 1,635 | 65% | 0.41 | 0.62 |

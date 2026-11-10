@@ -1,7 +1,7 @@
 """Llama/Gemma-style decoder with two forward paths.
 
 * :meth:`Transformer.forward` — the serving path: flat varlen tokens, K/V written into
-  a :class:`~kvforge.cache.PagedKVCache` and read back through PagedAttention.
+  a :class:`~pulsecache.cache.PagedKVCache` and read back through PagedAttention.
 * :meth:`Transformer.forward_dense` — HF-style padded ``[B, T]`` path with an optional
   contiguous ``past_key_values`` list; used by the naive baseline, perplexity eval and
   as a numerical oracle in tests.
@@ -17,10 +17,10 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from kvforge.cache.kv_cache import PagedKVCache
-from kvforge.cache.paged_attention import AttentionMetadata
-from kvforge.config import AttentionBackend, ModelConfig
-from kvforge.kernels.attention import get_attention_backend
+from pulsecache.cache.kv_cache import PagedKVCache
+from pulsecache.cache.paged_attention import AttentionMetadata
+from pulsecache.config import AttentionBackend, ModelConfig
+from pulsecache.kernels.attention import get_attention_backend
 
 DenseKV = list[tuple[torch.Tensor, torch.Tensor]]
 

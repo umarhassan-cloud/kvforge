@@ -25,9 +25,9 @@ import itertools
 import time
 from dataclasses import dataclass, field
 
-from kvforge.batching.request import FinishReason, Request, RequestStatus
-from kvforge.cache.block_manager import BlockManager
-from kvforge.config import SchedulerConfig, SchedulingPolicy
+from pulsecache.batching.request import FinishReason, Request, RequestStatus
+from pulsecache.cache.block_manager import BlockManager
+from pulsecache.config import SchedulerConfig, SchedulingPolicy
 
 
 @dataclass

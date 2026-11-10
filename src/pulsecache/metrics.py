@@ -7,8 +7,8 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from kvforge.batching.request import Request
-from kvforge.cache.block_manager import BlockManagerStats
+from pulsecache.batching.request import Request
+from pulsecache.cache.block_manager import BlockManagerStats
 
 
 def percentile(values: list[float], q: float) -> float:

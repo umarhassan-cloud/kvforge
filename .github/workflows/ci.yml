@@ -36,7 +36,7 @@ jobs:
           cache: pip
       - name: Install CPU PyTorch
         run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - name: Install kvforge
+      - name: Install pulsecache
         run: pip install -e ".[dev,serve]"
       - name: Unit + integration tests
         run: pytest -v

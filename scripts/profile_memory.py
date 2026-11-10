@@ -1,6 +1,6 @@
 """KV-cache memory profiler: paged allocation vs contiguous reservation.
 
-Drives the real :class:`kvforge.cache.BlockManager` with a synthetic decode workload
+Drives the real :class:`pulsecache.cache.BlockManager` with a synthetic decode workload
 (no model needed, runs in seconds) and reports, for a fixed KV memory budget:
 
 * how many sequences fit concurrently under each allocation strategy,
@@ -19,8 +19,8 @@ import json
 import random
 import statistics
 
-from kvforge.cache.block_manager import BlockManager
-from kvforge.model_loader import PRESETS
+from pulsecache.cache.block_manager import BlockManager
+from pulsecache.model_loader import PRESETS
 
 
 def bytes_per_token(preset: str, dtype_bytes: int) -> int:
